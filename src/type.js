@@ -5,6 +5,6 @@ export type RouteOption = {
 
 export type Route = {
   key: string | null,
-  param: { [string]: string },
   path: string,
+  param: { [string]: string },
 }

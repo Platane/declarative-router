@@ -2,23 +2,36 @@
   "name": "declarative-router",
   "description": "declarative router",
   "version": "0.1.0",
+  "main": "lib/index.js",
+  "files": ["lib/"],
+  "repository": "https://github.com/Platane/declarative-router",
+  "dependencies": {},
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-jest": "23.0.0-alpha.0",
+    "babel-plugin-module-resolver": "3.1.1",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-preset-flow": "6.23.0",
-    "flow-bin": "0.68.0",
-    "jest": "22.4.2",
-    "prettier": "1.11.1"
+    "babel-preset-react": "^6.24.1",
+    "flow-bin": "0.69.0",
+    "jest": "22.4.3",
+    "prettier": "1.12.0",
+    "react-redux": "5.0.7",
+    "redux": "3.7.2"
   },
-  "dependencies": {},
+  "peerDependencies": {
+    "react-redux": "=>5.0",
+    "redux": ">=3.7"
+  },
   "jest": {
     "testMatch": ["**/__tests__/**/*.(spec|test).js"]
   },
   "scripts": {
-    "test": "NODE_ENV=test jest --verbose"
+    "test": "NODE_ENV=test jest --verbose",
+    "build":
+      "rm -rf lib && NODE_ENV=production babel --out-dir ./lib --ignore __tests__ ./src"
   }
 }
