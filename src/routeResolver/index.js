@@ -18,7 +18,7 @@ const createRouteTree = (routes: RouteOption[]): RouteTree => {
   }
 
   routes.forEach(r => {
-    let node = routeTree
+    let node: RouteTree = routeTree
 
     r.path
       .split('/')
@@ -35,7 +35,7 @@ const createRouteTree = (routes: RouteOption[]): RouteTree => {
             },
           }
 
-          node = node.children['__var__'].next
+          node = node.children.__var__.next
         } else {
           node = node.children[l] = node.children[l] || {
             key: null,
@@ -87,7 +87,7 @@ export const createRouteResolver = (routes: RouteOption[]) => {
 
     return {
       key: validKey,
-      path: validPath,
+      path: validPath || '/',
       param,
     }
   }

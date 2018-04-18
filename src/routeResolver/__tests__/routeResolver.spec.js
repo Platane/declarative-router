@@ -17,7 +17,7 @@ it('should route to null if route does not exist', () => {
     { path: 'a', key: 'a' },
   ])
 
-  expect(getRoute('b')).toEqual({ key: null, param: {}, path: null })
+  expect(getRoute('b')).toEqual({ key: null, param: {}, path: '/' })
 })
 
 it('should route to / if route does not exist, and / if defined', () => {
