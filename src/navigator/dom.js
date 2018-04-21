@@ -2,7 +2,7 @@ import {
   stringify as querystringStringify,
   parse as querystringParse,
 } from 'querystring'
-import type { Location } from './type'
+import type { Location, Navigator } from './type'
 
 const toArray = path => path.split('/').filter(Boolean)
 const toPath = arr => arr.join('/')
@@ -50,12 +50,11 @@ export const createNavigator = ({
   pathPrefix = '',
 }: {
   pathPrefix: string,
-} = {}) => ({
+} = {}): Navigator => ({
   pushState: pushState(pathPrefix),
   replaceState: replaceState(pathPrefix),
   getLocation: getLocation(pathPrefix),
 
-  addListener: (fn: () => void) => window.addEventListener('popstate', fn),
-  removeListener: (fn: () => void) =>
-    window.removeEventListener('popstate', fn),
+  addListener: fn => window.addEventListener('popstate', fn),
+  removeListener: fn => window.removeEventListener('popstate', fn),
 })

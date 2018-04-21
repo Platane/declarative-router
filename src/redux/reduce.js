@@ -1,7 +1,7 @@
 import { createRouteResolver } from '../routeResolver'
 import type { Route, RouteOption } from '../type'
 
-type State = {
+export type State = {
   path: string,
   key: string | null,
   param: { [string]: string },

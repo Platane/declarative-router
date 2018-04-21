@@ -14,12 +14,12 @@ export class StatelessLink extends Component {
   static defaultProps = {
     pathPrefix: '',
     target: null,
-    href: null,
+    href: '',
+    hash: null,
     query: {},
-    hash: {},
   }
 
-  linkClicked = e => {
+  linkClicked = (e: MouseEvent) => {
     this.props.onClick && this.props.onClick(e)
 
     if (

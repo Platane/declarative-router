@@ -1,12 +1,13 @@
 import EventEmitter from 'events'
+import type { Navigator } from '../type'
 
-export const createNavigator = () => {
-  const history = [{ query: {}, hash: {}, path: '/' }]
+export const createNavigator = (): Navigator => {
+  const history = [{ query: {}, hash: '', path: '/' }]
 
   const eventEmitter = new EventEmitter()
 
-  const push = (path = '/', query = {}, hash = {}) =>
-    history.unshift({ query, hash, path })
+  const push = (path: string = '/', query: Object = {}, hash: string = '') =>
+    void history.unshift({ query, hash, path })
 
   return {
     getLocation: () => history[0],
@@ -14,8 +15,8 @@ export const createNavigator = () => {
     pushState: push,
     replaceState: push,
 
-    removeListener: fn => eventEmitter.removeListener('update', fn),
-    addListener: fn => eventEmitter.addListener('update', fn),
+    removeListener: fn => void eventEmitter.removeListener('update', fn),
+    addListener: fn => void eventEmitter.addListener('update', fn),
 
     push: (...args) => {
       push(...args)

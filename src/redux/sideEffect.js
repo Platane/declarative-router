@@ -1,4 +1,6 @@
 import { navigatorChanged } from './action'
+import type { Navigator } from '../navigator/type'
+import type { State } from './reduce'
 
 const defaultSelectRouter = x => x.router
 
@@ -6,10 +8,14 @@ const shallowEqual = (a, b) =>
   Object.keys(a).length == Object.keys(b).length &&
   Object.keys(a).every(key => a[key] == b[key])
 
+type Option = {
+  navigator: Navigator,
+  selectRouter: (state: Object) => State,
+}
 export const initSideEffect = ({
   navigator,
   selectRouter = defaultSelectRouter,
-}) => store => {
+}: Option) => store => {
   // when the navigator changed, fire an action
   const onNavigatorChange = () =>
     store.dispatch(navigatorChanged(navigator.getLocation()))

@@ -27,15 +27,17 @@ const createRouteTree = (routes: RouteOption[]): RouteTree => {
         if (l[0] === ':') {
           // it's a parameter
 
-          node.children['__var__'] = node.children['__var__'] || {
-            varName: l.slice(1),
-            next: {
-              key: null,
-              children: {},
-            },
+          const next = {
+            key: null,
+            children: {},
           }
 
-          node = node.children.__var__.next
+          node.children['__var__'] = node.children['__var__'] || {
+            varName: l.slice(1),
+            next: next,
+          }
+
+          node = next
         } else {
           node = node.children[l] = node.children[l] || {
             key: null,
@@ -73,9 +75,9 @@ export const createRouteResolver = (routes: RouteOption[]) => {
           const { next, varName } = node.children['__var__']
           node = next
           param[varName] = l
-        } else
-          // no match
-          return
+        }
+        // no match
+        else return
 
         matchingPath.push(l)
 
