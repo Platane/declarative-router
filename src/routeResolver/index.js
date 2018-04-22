@@ -27,17 +27,15 @@ const createRouteTree = (routes: RouteOption[]): RouteTree => {
         if (l[0] === ':') {
           // it's a parameter
 
-          const next = {
-            key: null,
-            children: {},
-          }
-
           node.children['__var__'] = node.children['__var__'] || {
             varName: l.slice(1),
-            next: next,
+            next: {
+              key: null,
+              children: {},
+            },
           }
 
-          node = next
+          node = node.children['__var__'].next
         } else {
           node = node.children[l] = node.children[l] || {
             key: null,

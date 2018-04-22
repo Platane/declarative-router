@@ -1,15 +1,5 @@
 import { createRouteResolver } from '../index'
 
-const routes = [
-  { path: 'a', key: 'a' },
-  { path: 'a/b/c', key: 'abc' },
-  { path: 'u/w', key: 'uw' },
-  { path: 'u/:id', key: 'uid' },
-  { path: 'u/y/h', key: 'uyh' },
-]
-
-const getRoute = createRouteResolver(routes)
-
 it('should route to null if route does not exist', () => {
   const getRoute = createRouteResolver([
     //
@@ -62,5 +52,22 @@ it('should grab param', () => {
     key: 'a',
     param: { id: '123' },
     path: '/a/123',
+  })
+})
+
+it('should grab param 2', () => {
+  const getRoute = createRouteResolver([
+    //
+    { path: 'a', key: 'u' },
+    { path: 'a/:b', key: 'b' },
+    { path: 'a/:b/c', key: 'c' },
+    { path: 'a/:b/w', key: 'w' },
+    { path: 'a/:b/c/:d', key: 'd' },
+  ])
+
+  expect(getRoute('a/123/c/456')).toEqual({
+    key: 'd',
+    param: { b: '123', d: '456' },
+    path: '/a/123/c/456',
   })
 })
