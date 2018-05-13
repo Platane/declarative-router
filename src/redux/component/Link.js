@@ -15,7 +15,7 @@ export class StatelessLink extends Component {
     pathPrefix: '',
     target: null,
     href: '',
-    hash: null,
+    hash: '',
     query: {},
   }
 
